@@ -381,10 +381,11 @@ getopt = function (spec=NULL,opt=commandArgs(TRUE),command=get_Rscript_filename(
 
     #invalid opt
     if ( current.flag == 0 ) {
-      stop(paste('"', optstring, '" is not a valid option, or does not support an argument', sep=''));
+      #stop(paste('"', optstring, '" is not a valid option, or does not support an argument', sep=''));
       #TBD support for positional args
-      #if ( debug ) print(paste('"', optstring, '" not a valid option.  It is appended to getopt(...)$ARGS', sep=''));
-      #result$ARGS = append(result$ARGS, optstring);
+      if ( debug ) print(paste('"', optstring, '" not a valid option.  It is appended to getopt(...)$ARGS', sep=''));
+      a <- optstring; while(substr(a, start = nchar(a), stop = nchar(a))==' ') a <- substr(a, 1, stop = nchar(a) - 1);
+      result$ARGS = append(result$ARGS,a);
 
     # some dangling flag, handle it
     } else if ( current.flag > 0 ) {
